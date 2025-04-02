@@ -1,0 +1,1 @@
+//display full club member information

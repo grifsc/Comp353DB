@@ -1,7 +1,7 @@
 <?php 
 require_once '../database.php';
 
-$query = 'SELECT CMN, FirstName, LastName, BirthDate FROM kqc353_4.ClubMember';
+$query = 'SELECT CMN, FirstName, LastName, BirthDate, EnrollmentDate, Height, `Weight`, SIN, MedicareCardNumber, Telephone, `Address`, City, Province, PostalCode, CurrentLocationID FROM kqc353_4.ClubMember';
 $statement = $conn->query($query);
 
 // Check if query succeeded
@@ -12,6 +12,15 @@ if ($statement === false) {
 // Check if there are any results
 $hasResults = false;
 ?>
+
+<?php
+
+$successMessage = '';
+if (isset($_GET['success']) && $_GET['success'] == 1) {
+    $successMessage = 'Club member created successfully!';
+}
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +47,11 @@ $hasResults = false;
 
 <main>
     <h2>Club Member</h2>
+
+    <?php if (!empty($successMessage)): ?>
+    <div class="success-message"><?= htmlspecialchars($successMessage) ?></div>
+    <?php endif; ?>
+
     <h3><a class="show-link" href ="create.php">Create Club Member</a></h3>
     
 
