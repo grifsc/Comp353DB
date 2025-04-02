@@ -1,6 +1,8 @@
 :root {
     --blue: rgb(72, 98, 250);
     --light-blue: rgb(120, 140, 255);
+    --red: rgb(250, 72, 72);
+    --yellow: rgb(250, 194, 72);
 }
 
 body{
@@ -13,6 +15,10 @@ main{
 
 h1{
     text-align: center;
+}
+
+td{
+    padding: 0.5rem 1.5rem;
 }
 
 .navbar ul{
@@ -38,4 +44,19 @@ h1{
 .navbar li{
     display: inline-block;
     margin: 0 1rem;
+}
+
+.show-link{
+    color: var(--blue);
+    margin: 1rem;
+}
+
+.edit-link{
+    color: var(--blue); 
+    margin: 1rem;
+}
+
+.delete-link{
+    color: var(--red);
+    margin: 1rem;
 }
