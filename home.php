@@ -14,7 +14,7 @@
 <nav class = "navbar">
     <ul>
         <li><a href ="home.php">Home</a></li>
-        <li><a href ="Location/index.php">Club Location</a></li>
+        <li><a href ="ClubLocation/index.php">Club Location</a></li>
         <li><a href ="Personnel/index.php">Personnel</a></li>
         <li><a href ="FamilyMember/index.php">Family Member</a></li>
         <li><a href ="ClubMember/index.php">Club Member</a></li>

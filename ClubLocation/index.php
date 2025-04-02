@@ -1,7 +1,7 @@
 <?php 
 require_once '../database.php';
 
-$query = 'SELECT PersonnelID, FirstName, LastName, BirthDate, SIN, MedicareCardNumber, Telephone, `Address`, City, Province, PostalCode, Email FROM kqc353_4.Personnel';
+$query = 'SELECT LocationID, LocationType, `Name`, `Address`, City, Province, PostalCode, WebAddress, MaxCapacity FROM kqc353_4.ClubLocation';
 $statement = $conn->query($query);
 
 // Check if query succeeded
@@ -18,7 +18,7 @@ $hasResults = false;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personnel</title>
+    <title>Club Location</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -37,25 +37,23 @@ $hasResults = false;
 </nav>
 
 <main>
-    <h2>Personnel</h2>
-    <h3><a class="show-link" href ="create.php">Create Club Member</a></h3>
+    <h2>Club Location</h2>
+    <h3><a class="show-link" href ="create.php">Create Club Location</a></h3>
     
 
     <div>
         <table class="index-table">
             <tr>
-                <th>PersonnelID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Birth Date</th>
-                <th>SIN</th>
-                <th>MedicareCardNumber</th>
-                <th>Telephone</th>
+                <th>LocationID</th>
+                <th>LocationType</th>
+                <th>Name</th>
                 <th>Address</th>
                 <th>City</th>
                 <th>Province</th>
                 <th>PostalCode</th>
-                <th>Email</th>
+                <th>WebAddress</th>
+                <th>MaxCapacity</th>
+
             </tr>
             <?php 
             if ($statement->num_rows > 0) {
@@ -63,23 +61,20 @@ $hasResults = false;
                     $hasResults = true;
             ?>
                     <tr>
-                        <td><?= htmlspecialchars($row['PersonnelID']) ?></td>
-                        <td><?= htmlspecialchars($row['FirstName']) ?></td>
-                        <td><?= htmlspecialchars($row['LastName']) ?></td>
-                        <td><?= htmlspecialchars($row['BirthDate']) ?></td>
-                        <td><?= htmlspecialchars($row['SIN']) ?></td>
-                        <td><?= htmlspecialchars($row['MedicareCardNumber']) ?></td>
-                        <td><?= htmlspecialchars($row['Telephone']) ?></td>
+                        <td><?= htmlspecialchars($row['LocationID']) ?></td>
+                        <td><?= htmlspecialchars($row['LocationType']) ?></td>
+                        <td><?= htmlspecialchars($row['Name']) ?></td>
                         <td><?= htmlspecialchars($row['Address']) ?></td>
                         <td><?= htmlspecialchars($row['City']) ?></td>
                         <td><?= htmlspecialchars($row['Province']) ?></td>
                         <td><?= htmlspecialchars($row['PostalCode']) ?></td>
-                        <td><?= htmlspecialchars($row['Email']) ?></td>
+                        <td><?= htmlspecialchars($row['WebAddress']) ?></td>
+                        <td><?= htmlspecialchars($row['MaxCapacity']) ?></td>
                         <td>
                           <!-- pass pID to edit and delete php file-->
-                          <a class="show-link" href="display.php?CMN=<?= $row['PersonnelID'] ?>" >Display</a>
-                          <a class="edit-link" href="edit.php?CMN=<?= $row['PersonnelID'] ?>" >Edit</a>
-                          <a class="delete-link" href="delete.php?CMN=<?= $row['PersonnelID'] ?>" >Delete</a>
+                          <a class="show-link" href="display.php?CMN=<?= $row['LocationID'] ?>" >Display</a>
+                          <a class="edit-link" href="edit.php?CMN=<?= $row['LocationID'] ?>" >Edit</a>
+                          <a class="delete-link" href="delete.php?CMN=<?= $row['LocationID'] ?>" >Delete</a>
                       </td>
                     </tr>
             <?php 

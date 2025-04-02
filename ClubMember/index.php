@@ -28,7 +28,7 @@ $hasResults = false;
 <nav class="navbar">
     <ul>
         <li><a href="../home.php">Home</a></li>
-        <li><a href="../Location/index.php">Club Location</a></li>
+        <li><a href="../ClubLocation/index.php">Club Location</a></li>
         <li><a href="../Personnel/index.php">Personnel</a></li>
         <li><a href="../FamilyMember/index.php">Family Member</a></li>
         <li><a href="../ClubMember/index.php">Club Member</a></li>
@@ -38,6 +38,8 @@ $hasResults = false;
 
 <main>
     <h2>Club Member</h2>
+    <h3><a class="show-link" href ="create.php">Create Club Member</a></h3>
+    
 
     <div>
         <table class="index-table">
@@ -59,7 +61,7 @@ $hasResults = false;
                         <td><?= htmlspecialchars($row['BirthDate']) ?></td>
                         <td>
                           <!-- pass pID to edit and delete php file-->
-                          <a class="show-link" href="show.php?CMN=<?= $row["CMN"] ?>" >Show</a>
+                          <a class="show-link" href="display.php?CMN=<?= $row["CMN"] ?>" >Display</a>
                           <a class="edit-link" href="edit.php?CMN=<?= $row["CMN"] ?>" >Edit</a>
                           <a class="delete-link" href="delete.php?CMN=<?= $row["CMN"] ?>" >Delete</a>
                       </td>
