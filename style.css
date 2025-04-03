@@ -3,6 +3,7 @@
     --light-blue: rgb(120, 140, 255);
     --red: rgb(250, 72, 72);
     --light-red: rgb(255, 120, 120);
+    --deep-red: rgb(198, 40, 40);
     --green: rgb(72, 200, 120);      
     --light-green: rgb(120, 220, 150);
     --yellow: rgb(250, 194, 72);
@@ -138,11 +139,6 @@ td{
     background-color: var(--light-red);
 }
 
-.error {
-    color: var(--red);
-    font-size: 0.9em;
-    margin-top: 5px;
-}
 
 .success-message {
     background-color: white;
@@ -153,13 +149,23 @@ td{
     border-radius: 0;
 }
 
-.error-message {
-    background-color: var(--red);
+.error {
     color: var(--red);
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+
+.error-message {
+    background-color: var(white);
+    color: var(--deep-red);
     padding: 10px 15px;
     margin: 10px 0;
     border: 1px solid #f5c6cb;
     border-radius: 0; 
+    padding: 15px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--deep-red);
 }
 
 /* Responsive adjustments */
