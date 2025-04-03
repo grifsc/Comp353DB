@@ -1,7 +1,7 @@
 <?php 
 require_once '../database.php';
-//FormationID, EventID, TeamID, CaptainCMN, LocationID, Score, Note //missing team ID check schema
-$query = 'SELECT FormationID, EventID, CaptainCMN, LocationID, Score, Note FROM kqc353_4.TeamFormation';
+//FormationID, EventID, TeamName, CaptainCMN, LocationID, Score, Note //missing team ID check schema
+$query = 'SELECT FormationID, EventID, TeamName, CaptainCMN, LocationID, Score, Note FROM kqc353_4.TeamFormation';
 $statement = $conn->query($query);
 
 // Check if query succeeded
@@ -46,7 +46,7 @@ $hasResults = false;
             <tr>
                 <th>FormationID</th>
                 <th>EventID</th>
-                <th>TeamID</th>
+                <th>TeamName</th>
                 <th>CaptainCMN</th>
                 <th>LocationID</th>
                 <th>Score</th>
@@ -60,7 +60,7 @@ $hasResults = false;
                     <tr>
                         <td><?= htmlspecialchars($row['FormationID']) ?></td>
                         <td><?= htmlspecialchars($row['EventID']) ?></td>
-                        <td><?= htmlspecialchars($row['TeamID']) ?></td>
+                        <td><?= htmlspecialchars($row['TeamName']) ?></td>
                         <td><?= htmlspecialchars($row['CaptainCMN']) ?></td>
                         <td><?= htmlspecialchars($row['LocationID']) ?></td>
                         <td><?= htmlspecialchars($row['Score']) ?></td>
