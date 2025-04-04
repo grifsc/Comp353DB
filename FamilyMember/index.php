@@ -65,9 +65,9 @@ $hasResults = false;
                         <td><?= htmlspecialchars($row['MedicareCardNumber']) ?></td>
                         <td>
                           <!-- pass pID to edit and delete php file-->
-                          <a class="show-link" href="display.php?CMN=<?= $row['FamilyMemberID'] ?>" >Display</a>
-                          <a class="edit-link" href="edit.php?CMN=<?= $row['FamilyMemberID'] ?>" >Edit</a>
-                          <a class="delete-link" href="delete.php?CMN=<?= $row['FamilyMemberID'] ?>" >Delete</a>
+                          <a class="show-link" href="display.php?FamilyMemberID=<?= $row['FamilyMemberID'] ?>" >Display</a>
+                          <a class="edit-link" href="edit.php?FamilyMemberID=<?= $row['FamilyMemberID'] ?>" >Edit</a>
+                          <a class="delete-link" href="delete.php?FamilyMemberID=<?= $row['FamilyMemberID'] ?>" >Delete</a>
                       </td>
                     </tr>
             <?php 

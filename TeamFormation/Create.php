@@ -1,10 +1,10 @@
 <?php
 require_once '../database.php';
 
-// Initialize variables
+//initialize variables
 $formData = [
     'eventID' => '',
-    'TeamName' => '',  // Using TeamName as per your schema
+    'TeamName' => '', 
     'captainCMN' => '',
     'locationID' => '',
     'score' => 0,
@@ -12,13 +12,13 @@ $formData = [
 ];
 $errors = [];
 
-// Fetch required data for dropdowns
+//fetch required data for dropdowns
 $events = [];
 $teams = [];
 $captains = [];
 $locations = [];
 
-// Get available events
+//get available events
 $eventsQuery = "SELECT EventID, CONCAT('Event #', EventID, ' - ', DATE_FORMAT(EventDateTime, '%Y-%m-%d %H:%i'), ' - ', SessionType) AS EventInfo FROM kqc353_4.Event";
 $eventsResult = $conn->query($eventsQuery);
 if ($eventsResult) {
@@ -27,7 +27,7 @@ if ($eventsResult) {
     }
 }
 
-// Get available teams - selecting TeamName as per your schema
+//get available teams
 $teamsQuery = "SELECT TeamName FROM kqc353_4.Team";
 $teamsResult = $conn->query($teamsQuery);
 if ($teamsResult) {
@@ -36,7 +36,7 @@ if ($teamsResult) {
     }
 }
 
-// Get available captains (club members)
+//get available captains (club members)
 $captainsQuery = "SELECT CMN, CONCAT(FirstName, ' ', LastName) AS FullName FROM kqc353_4.ClubMember";
 $captainsResult = $conn->query($captainsQuery);
 if ($captainsResult) {
@@ -45,7 +45,7 @@ if ($captainsResult) {
     }
 }
 
-// Get available locations
+//get available locations
 $locationsQuery = "SELECT LocationID, Name FROM kqc353_4.ClubLocation";
 $locationsResult = $conn->query($locationsQuery);
 if ($locationsResult) {
@@ -54,14 +54,14 @@ if ($locationsResult) {
     }
 }
 
-// Process form submission
+//process form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Sanitize all inputs
     foreach ($_POST as $key => $value) {
         $formData[$key] = trim($value);
     }
 
-    // Validate required fields
+    //validate required fields
     $requiredFields = ['eventID', 'TeamName', 'captainCMN', 'locationID'];
     
     foreach ($requiredFields as $field) {
@@ -70,14 +70,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Validate numeric fields
+    //validate numeric fields
     if (!empty($formData['score']) && !is_numeric($formData['score'])) {
         $errors['score'] = 'Score must be a number';
     }
 
-    // Verify foreign keys exist
+    //verify foreign keys exist
     if (empty($errors)) {
-        // Check Event exists
+        //check Event exists
         $checkEvent = $conn->prepare("SELECT COUNT(*) AS count FROM kqc353_4.Event WHERE EventID = ?");
         $checkEvent->bind_param("i", $formData['eventID']);
         $checkEvent->execute();
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $checkEvent->close();
 
-        // Check Team exists (by TeamName)
+        //check Team exists (by TeamName)
         $checkTeam = $conn->prepare("SELECT COUNT(*) AS count FROM kqc353_4.Team WHERE TeamName = ?");
         $checkTeam->bind_param("s", $formData['TeamName']);
         $checkTeam->execute();
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $checkTeam->close();
 
-        // Check Captain exists
+        //check if Captain exists
         $checkCaptain = $conn->prepare("SELECT COUNT(*) AS count FROM kqc353_4.ClubMember WHERE CMN = ?");
         $checkCaptain->bind_param("i", $formData['captainCMN']);
         $checkCaptain->execute();
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $checkCaptain->close();
 
-        // Check Location exists
+        //check Location exists
         $checkLocation = $conn->prepare("SELECT COUNT(*) AS count FROM kqc353_4.ClubLocation WHERE LocationID = ?");
         $checkLocation->bind_param("i", $formData['locationID']);
         $checkLocation->execute();
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $checkLocation->close();
     }
 
-    // If no errors, insert into database
+    //if no errors, insert into database
     if (empty($errors)) {
         $conn->begin_transaction();
         try {
@@ -154,8 +154,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (Exception $e) {
             $conn->rollback();
             $errors['database'] = "Database operation failed. Please try again. ";
-            // For debugging during development only:
-            $errors['database'] .= "Error details: " . $e->getMessage();
         }
     }
 }

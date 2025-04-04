@@ -77,9 +77,9 @@ $hasResults = false;
                         <td><?= htmlspecialchars($row['Email']) ?></td>
                         <td>
                           <!-- pass pID to edit and delete php file-->
-                          <a class="show-link" href="display.php?CMN=<?= $row['PersonnelID'] ?>" >Display</a>
-                          <a class="edit-link" href="edit.php?CMN=<?= $row['PersonnelID'] ?>" >Edit</a>
-                          <a class="delete-link" href="delete.php?CMN=<?= $row['PersonnelID'] ?>" >Delete</a>
+                          <a class="show-link" href="display.php?PersonnelID=<?= $row['PersonnelID'] ?>" >Display</a>
+                          <a class="edit-link" href="edit.php?PersonnelID=<?= $row['PersonnelID'] ?>" >Edit</a>
+                          <a class="delete-link" href="delete.php?PersonnelID=<?= $row['PersonnelID'] ?>" >Delete</a>
                       </td>
                     </tr>
             <?php 

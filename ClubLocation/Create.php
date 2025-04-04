@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['maxCapacity'] = 'Must be a valid number';
     }
 
-    // If no errors, insert into database
+    //if no errors, insert into database
     if (empty($errors)) {
         $query = "INSERT INTO kqc353_4.ClubLocation (
             LocationType, Name, Address, City, Province, PostalCode, WebAddress, MaxCapacity
@@ -81,73 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Club Location</title>
     <link rel="stylesheet" href="../style.css">
-    <style>
-        .form-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"],
-        input[type="number"],
-        input[type="url"],
-        select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 0;
-        }
-        .error {
-            color: red;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-        .form-actions {
-            grid-column: span 2;
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-        }
-        .submit-button, .cancel-button {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 0;
-            cursor: pointer;
-            width: 140px;
-            text-align: center;
-        }
-        .submit-button {
-            background-color: rgb(72, 98, 250);
-            color: white;
-        }
-        .submit-button:hover {
-            background-color: rgb(120, 140, 255);
-        }
-        .cancel-button {
-            background-color: rgb(250, 72, 72);
-            color: white;
-            text-decoration: none;
-        }
-        .cancel-button:hover {
-            background-color: rgb(255, 120, 120);
-        }
-        /* Remove number input spinners */
-        input[type="number"]::-webkit-outer-spin-button,
-        input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        input[type="number"] {
-            -moz-appearance: textfield;
-        }
-    </style>
 </head>
 <body>
     

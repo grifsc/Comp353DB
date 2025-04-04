@@ -67,9 +67,9 @@ $hasResults = false;
                         <td><?= htmlspecialchars($row['Note']) ?></td>
                         <td>
                           <!-- pass pID to edit and delete php file-->
-                          <a class="show-link" href="display.php?CMN=<?= $row['FormationID'] ?>" >Display</a>
-                          <a class="edit-link" href="edit.php?CMN=<?= $row['FormationID'] ?>" >Edit</a>
-                          <a class="delete-link" href="delete.php?CMN=<?= $row['FormationID'] ?>" >Delete</a>
+                          <a class="show-link" href="display.php?FormationID=<?= $row['FormationID'] ?>" >Display</a>
+                          <a class="edit-link" href="edit.php?FormationID=<?= $row['FormationID'] ?>" >Edit</a>
+                          <a class="delete-link" href="delete.php?FormationID=<?= $row['FormationID'] ?>" >Delete</a>
                       </td>
                     </tr>
             <?php 

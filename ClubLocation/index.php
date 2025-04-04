@@ -72,9 +72,9 @@ $hasResults = false;
                         <td><?= htmlspecialchars($row['MaxCapacity']) ?></td>
                         <td>
                           <!-- pass pID to edit and delete php file-->
-                          <a class="show-link" href="display.php?CMN=<?= $row['LocationID'] ?>" >Display</a>
-                          <a class="edit-link" href="edit.php?CMN=<?= $row['LocationID'] ?>" >Edit</a>
-                          <a class="delete-link" href="delete.php?CMN=<?= $row['LocationID'] ?>" >Delete</a>
+                          <a class="show-link" href="display.php?LocationID=<?= $row['LocationID'] ?>" >Display</a>
+                          <a class="edit-link" href="edit.php?LocationID=<?= $row['LocationID'] ?>" >Edit</a>
+                          <a class="delete-link" href="delete.php?LocationID=<?= $row['LocationID'] ?>" >Delete</a>
                       </td>
                     </tr>
             <?php 
