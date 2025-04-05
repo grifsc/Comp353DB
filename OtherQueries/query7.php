@@ -76,7 +76,6 @@ if (!$result) {
 
 <main>
     <h2 class="query-title">Query 7: Complete Location Details</h2>
-    <h3>Showing all locations with their full details, including manager information and member counts.<h3>
     
     <div class="results-container">
         <?php if ($result->num_rows > 0): ?>

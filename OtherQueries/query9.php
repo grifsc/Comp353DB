@@ -70,110 +70,6 @@ if ($selectedLocation && $selectedDateTime) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Query 9 - Team Formations by Location and Time Range | MYVC Montreal</title>
     <link rel="stylesheet" href="../style.css">
-    <style>
-        .form-container {
-            margin: 20px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            max-width: 600px;
-        }
-        .form-row {
-            margin-bottom: 15px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .form-group {
-            flex: 1;
-            min-width: 200px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        select, input, button {
-            padding: 8px 12px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            cursor: pointer;
-            width: auto;
-            padding: 10px 20px;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-        .results-container {
-            margin: 20px;
-            overflow-x: auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #2c3e50;
-            color: white;
-            position: sticky;
-            top: 0;
-        }
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-        .no-results {
-            padding: 20px;
-            text-align: center;
-            font-style: italic;
-            color: #666;
-        }
-        .query-title {
-            margin: 20px;
-            color: #2c3e50;
-        }
-        .back-link {
-            display: inline-block;
-            margin: 20px;
-            padding: 10px 15px;
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-        }
-        .back-link:hover {
-            background-color: #2980b9;
-        }
-        .session-upcoming {
-            background-color: #e6f7ff;
-        }
-        .session-completed {
-            background-color: #f6ffed;
-        }
-        .session-header {
-            background-color: #e0e0e0;
-            font-weight: bold;
-        }
-        .time-range-info {
-            margin: 15px 0;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border-radius: 4px;
-        }
-    </style>
 </head>
 <body>
     
@@ -299,7 +195,7 @@ if ($selectedLocation && $selectedDateTime) {
             <?php endif; ?>
         </div>
     <?php endif; ?>
-    
+    <br>
     <a href="../otherQueries/index.php" class="back-link">Back to All Queries</a>
 </main>
 

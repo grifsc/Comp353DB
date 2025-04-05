@@ -90,7 +90,6 @@ if ($selectedFamilyMember) {
 
 <main>
     <h2 class="query-title">Query 8: Family Member Associations</h2>
-    <p>View all locations, secondary family members, and club members associated with a primary family member.</p>
     
     <div class="form-container">
         <form method="get" action="query8.php">

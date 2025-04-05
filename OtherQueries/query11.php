@@ -132,7 +132,7 @@ if (isset($_GET['start_datetime']) && isset($_GET['end_datetime'])) {
             <?php endif; ?>
         </div>
     <?php endif; ?>
-    
+    <br>
     <a href="../otherQueries/index.php" class="back-link">Back to All Queries</a>
 </main>
 

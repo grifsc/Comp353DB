@@ -105,7 +105,7 @@ if (!$result) {
             <p class="no-results">No club members found matching the criteria.</p>
         <?php endif; ?>
     </div>
-    
+    <br>
     <a href="../otherQueries/index.php" class="back-link">Back to All Queries</a>
 </main>
 

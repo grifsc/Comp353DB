@@ -7,46 +7,22 @@ if ($conn->connect_error) {
 }
 
 $query = "
-    WITH GameScores AS (
-        SELECT 
-            e.EventID,
-            MIN(tf.Score) AS MinScore,
-            MAX(tf.Score) AS MaxScore
-        FROM 
-            Event e
-        JOIN 
-            TeamFormation tf ON e.EventID = tf.EventID
-        WHERE 
-            e.SessionType = 'Game'
-        GROUP BY 
-            e.EventID
-        HAVING 
-            COUNT(*) = 2
-    ),
-
-    LosingFormations AS (
-        SELECT DISTINCT
-            pa.CMN
-        FROM 
-            PlayerAssignment pa
-        JOIN 
-            TeamFormation tf ON pa.FormationID = tf.FormationID
-        JOIN 
-            GameScores gs ON tf.EventID = gs.EventID
-        WHERE 
-            tf.Score = gs.MinScore 
-            AND gs.MinScore != gs.MaxScore
-    )
-
     SELECT 
-        cm.CMN,
         cm.FirstName,
         cm.LastName,
-        TIMESTAMPDIFF(YEAR, cm.BirthDate, CURDATE()) AS Age,
         cm.Telephone,
-        fm.Email AS FamilyMemberEmail,
-        cl.Name AS CurrentLocationName,
-        COUNT(DISTINCT tf.FormationID) AS GamesPlayed
+        fm.Email,
+        DATE_ADD(cm.BirthDate, INTERVAL 18 YEAR) AS DeactivationDate,
+        cl.Name AS LastLocationName,
+        (
+            SELECT pa.PlayerRole 
+            FROM PlayerAssignment pa
+            JOIN TeamFormation tf ON pa.FormationID = tf.FormationID
+            JOIN Event e ON tf.EventID = e.EventID
+            WHERE pa.CMN = cm.CMN
+            ORDER BY e.EventDateTime DESC
+            LIMIT 1
+        ) AS LastRole
     FROM 
         ClubMember cm
     JOIN 
@@ -55,20 +31,14 @@ $query = "
         FamilyRelationship fr ON cm.CMN = fr.ChildMemberCMN
     JOIN
         FamilyMember fm ON fr.FamilyMemberID = fm.FamilyMemberID
-    JOIN 
-        PlayerAssignment pa ON cm.CMN = pa.CMN
-    JOIN 
-        TeamFormation tf ON pa.FormationID = tf.FormationID
-    JOIN 
-        Event e ON tf.EventID = e.EventID AND e.SessionType = 'Game'
     WHERE 
-        cm.BirthDate <= DATE_SUB(CURDATE(), INTERVAL 11 YEAR)
-        AND cm.BirthDate >= DATE_SUB(CURDATE(), INTERVAL 18 YEAR)
-        AND cm.CMN NOT IN (SELECT CMN FROM LosingFormations)
-    GROUP BY 
-        cm.CMN, cm.FirstName, cm.LastName, cm.BirthDate, cm.Telephone, fm.Email, cl.Name
+        cm.BirthDate <= DATE_SUB(CURDATE(), INTERVAL 18 YEAR)
+        AND fr.RelationshipEndDate IS NULL  -- Only current family relationships
     ORDER BY 
-        cl.Name ASC, cm.CMN ASC
+        cl.Name ASC,
+        LastRole ASC,
+        cm.FirstName ASC,
+        cm.LastName ASC
 ";
 
 $result = $conn->query($query);
@@ -80,7 +50,7 @@ if (!$result) {
 // Group results by location first
 $groupedResults = [];
 while ($row = $result->fetch_assoc()) {
-    $location = $row['CurrentLocationName'];
+    $location = $row['LastLocationName'];
     if (!isset($groupedResults[$location])) {
         $groupedResults[$location] = [];
     }
@@ -93,8 +63,9 @@ while ($row = $result->fetch_assoc()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Query 16 - Undefeated Players | MYVC Montreal</title>
+    <title>Query 18 - Aged Out Members | MYVC Montreal</title>
     <link rel="stylesheet" href="../style.css">
+
 </head>
 <body>
     
@@ -114,51 +85,54 @@ while ($row = $result->fetch_assoc()) {
 </nav>
 
 <main>
-    <h2 class="query-title">Query 16: Undefeated Players</h2>
+    <h2 class="query-title">Query 18: Aged Out Members</h2>
     
     <div class="results-container">
         <?php if (!empty($groupedResults)): ?>
             <?php foreach ($groupedResults as $location => $members): ?>
+                <br>
                 <table>
                     <thead>
                         <tr class="location-header">
-                            <th colspan="8"><?= htmlspecialchars($location) ?></th>
+                            <th colspan="7"><?= htmlspecialchars($location) ?></th>
                         </tr>
                         <tr>
-                            <th>CMN</th>
                             <th>Name</th>
-                            <th>Age</th>
                             <th>Phone</th>
                             <th>Email</th>
-                            <th>Games Played</th>
-                            <th>Status</th>
+                            <th>Deactivated On</th>
+                            <th>Last Role</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($members as $member): ?>
                             <tr>
-                                <td><?= htmlspecialchars($member['CMN']) ?></td>
                                 <td><?= htmlspecialchars($member['FirstName'] . ' ' . $member['LastName']) ?></td>
-                                <td><?= htmlspecialchars($member['Age']) ?></td>
                                 <td><?= htmlspecialchars($member['Telephone'] ?? 'N/A') ?></td>
                                 <td>
-                                    <?php if (!empty($member['FamilyMemberEmail'])): ?>
-                                        <a href="mailto:<?= htmlspecialchars($member['FamilyMemberEmail']) ?>">
-                                            <?= htmlspecialchars($member['FamilyMemberEmail']) ?>
+                                    <?php if (!empty($member['Email'])): ?>
+                                        <a href="mailto:<?= htmlspecialchars($member['Email']) ?>">
+                                            <?= htmlspecialchars($member['Email']) ?>
                                         </a>
                                     <?php else: ?>
                                         N/A
                                     <?php endif; ?>
                                 </td>
-                                <td><?= htmlspecialchars($member['GamesPlayed']) ?></td>
-                                <td><span class="win-badge">Undefeated</span></td>
+                                <td class="deactivated"><?= date('M j, Y', strtotime($member['DeactivationDate'])) ?></td>
+                                <td>
+                                    <?php if (!empty($member['LastRole'])): ?>
+                                        <span class="role-badge"><?= htmlspecialchars($member['LastRole']) ?></span>
+                                    <?php else: ?>
+                                        N/A
+                                    <?php endif; ?>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
             <?php endforeach; ?>
         <?php else: ?>
-            <p class="no-results">No undefeated club members found matching the criteria.</p>
+            <p class="no-results">No aged out club members found in the system.</p>
         <?php endif; ?>
     </div>
     <br>
