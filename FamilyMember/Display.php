@@ -33,7 +33,7 @@ $secondaryStmt->execute();
 $secondaryResult = $secondaryStmt->get_result();
 $secondaryMembers = $secondaryResult->fetch_all(MYSQLI_ASSOC);
 
-// Fetch club members (children) associated with this family member
+// Fetch club members associated with this family member
 $childrenQuery = "SELECT cm.*, fr.RelationshipType 
                  FROM kqc353_4.ClubMember cm
                  JOIN kqc353_4.FamilyRelationship fr ON cm.CMN = fr.ChildMemberCMN
@@ -85,6 +85,7 @@ $children = $childrenResult->fetch_all(MYSQLI_ASSOC);
         <li><a href="../ClubMember/index.php">Club Member</a></li>
         <li><a href="../TeamFormation/index.php">Team Formation</a></li>
         <li><a href="../playerAssignment/index.php">Player Assignments</a></li>
+        <li><a href="../otherQueries/index.php">Other Queries</a></li>
     </ul>
 </nav>
 

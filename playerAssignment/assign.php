@@ -216,6 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <li><a href="../ClubMember/index.php">Club Member</a></li>
         <li><a href="../TeamFormation/index.php">Team Formation</a></li>
         <li><a href="index.php">Player Assignments</a></li>
+        <li><a href="../otherQueries/index.php">Other Queries</a></li>
     </ul>
 </nav>
 
