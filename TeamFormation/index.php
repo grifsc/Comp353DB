@@ -33,6 +33,7 @@ $hasResults = false;
         <li><a href="../FamilyMember/index.php">Family Member</a></li>
         <li><a href="../ClubMember/index.php">Club Member</a></li>
         <li><a href="../TeamFormation/index.php">Team Formation</a></li>
+        <li><a href="../playerAssignment/index.php">Player Assignments</a></li>
     </ul>
 </nav>
 

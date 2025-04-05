@@ -33,6 +33,7 @@ $hasResults = false;
         <li><a href="../FamilyMember/index.php">Family Member</a></li>
         <li><a href="../ClubMember/index.php">Club Member</a></li>
         <li><a href="../TeamFormation/index.php">Team Formation</a></li>
+        <li><a href="../playerAssignment/index.php">Player Assignments</a></li>
     </ul>
 </nav>
 
@@ -87,7 +88,7 @@ $hasResults = false;
             } 
             
             if (!$hasResults) {
-                echo '<tr><td colspan="4">No club members found</td></tr>';
+                echo '<tr><td colspan="4">No Personnel found</td></tr>';
             }
             ?>
         </table>
