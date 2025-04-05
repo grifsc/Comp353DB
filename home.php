@@ -23,6 +23,13 @@
 </nav>
 <main>
     <h2>Home</h2>
+    <br>
+    <p>
+    Tarik Bikhandafne (40246844) <br>
+    Jaxon Alexander (40278732)  <br>
+    Dan Derzi (4028350) <br>
+    Griffin Sin-Chan (40278049) <br>
+    </p>
 
 </main>
 
